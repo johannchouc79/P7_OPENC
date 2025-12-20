@@ -12,7 +12,7 @@ app = FastAPI(
 
 
 MODEL_PATH = "models/pipeline_best_model_top20.joblib"
-SEUIL_METIER = 0.65
+SEUIL_METIER = 0.29
 
 
 model = joblib.load(MODEL_PATH)
