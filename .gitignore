@@ -1,0 +1,15 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+env/
+venv/
+
+data/
+*.csv
+
+mlruns/
+mlruns_artifacts/
+reports/
+
+.DS_Store
+Thumbs.db

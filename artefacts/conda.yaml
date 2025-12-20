@@ -1,0 +1,11 @@
+channels:
+- defaults
+- conda-forge
+dependencies:
+- python=3.10.11
+- scikit-learn
+- pandas
+- numpy
+- mlflow
+- matplotlib
+name: gb_model_env
