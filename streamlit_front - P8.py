@@ -27,7 +27,7 @@ import altair as alt
 # ============================================================
 
 API_URL = "http://127.0.0.1:8000/predict"
-THRESHOLD = 0.30
+THRESHOLD = 0.29
 
 
 # ============================================================
@@ -416,11 +416,6 @@ sample_clients = {
 # ============================================================
 # 🗂️ 2 BIS) BASE DE COMPARAISON CLIENTS (PROJET 8)
 # ============================================================
-# Cette base simule un portefeuille clients réel.
-# Elle est utilisée pour :
-# - comparer un client à l'ensemble des clients
-# - comparer à des groupes similaires via filtres
-# (exigence explicite du Projet 8)
 
 @st.cache_data
 def build_population(seed: int = 0) -> pd.DataFrame:
@@ -441,9 +436,6 @@ clients_population = build_population(seed=0)
 # ============================================================
 # 🧠 2 TER) OUTILS — APPEL API ROBUSTE
 # ============================================================
-# Important en Projet 8 :
-# - éviter de bloquer l’interface si l’API ne répond pas
-# - afficher une erreur lisible si problème réseau / serveur
 
 def call_api(payload: dict) -> dict:
     try:
@@ -458,9 +450,6 @@ def call_api(payload: dict) -> dict:
 # ============================================================
 # 🔧 B) (NOUVEAU) ÉTAT API (BONUS PROJET 8)
 # ============================================================
-# Objectif :
-# - éviter que l’utilisateur pense que le dashboard bug alors que l’API est down
-# - expliciter la dépendance API en déploiement Cloud
 
 st.sidebar.markdown("### 🔌 État de l'API")
 
@@ -477,13 +466,6 @@ if st.sidebar.button("Tester l'API"):
 # ============================================================
 # 🧠 2 QUATER) SESSION STATE — POUR ÉVITER “ÇA FERME LA PAGE”
 # ============================================================
-# Streamlit relance le script à CHAQUE interaction (selectbox, slider…).
-# Si tout est dans un `if st.button(...)`, alors au re-run :
-# - le bouton redevient False
-# - tout disparaît
-# => impression de "page qui ferme"
-#
-# Solution : stocker le dernier résultat API dans st.session_state.
 
 if "last_result" not in st.session_state:
     st.session_state["last_result"] = None
@@ -552,10 +534,6 @@ with col2:
 # ============================================================
 # 🧾 C) (NOUVEAU) INDICATEURS MÉTIER SYNTHÉTIQUES (PROJET 8)
 # ============================================================
-# Objectif :
-# - donner des KPI simples lisibles par un chargé client
-# - éviter une lecture "data" trop brute
-# - faciliter l’explication au client
 
 age_years = abs(client_data["DAYS_BIRTH"]) // 365
 seniority_years = abs(client_data["DAYS_EMPLOYED"]) // 365
@@ -578,8 +556,6 @@ st.caption(
 # ============================================================
 # 🔮 6) APPEL API
 # ============================================================
-# IMPORTANT : on utilise un formulaire pour déclencher l’appel proprement,
-# et on stocke le résultat dans session_state pour qu’il reste affiché.
 
 with st.form("form_scoring", clear_on_submit=False):
     submit = st.form_submit_button("🔮 Calculer la décision")
@@ -602,21 +578,14 @@ if submit:
 # ============================================================
 # ✅ AFFICHAGE RÉSULTATS — PERSISTANT (NE DISPARAÎT PAS)
 # ============================================================
-# Même si l’utilisateur change un filtre, le dernier résultat reste visible.
 
 if st.session_state["last_result"] is not None:
 
-    # On reprend le dernier résultat stocké
     result = st.session_state["last_result"]
     proba = result.get("probability")
     decision = result.get("decision")
 
-    # ====================================================
-    # 🎯 7) SCORE & DISTANCE AU SEUIL
-    # ====================================================
-
     st.subheader("🎯 Résultat du scoring")
-
     st.write(f"**Client scoré :** {st.session_state['last_client_name']}")
 
     st.metric(
@@ -627,15 +596,7 @@ if st.session_state["last_result"] is not None:
 
     st.progress(min(proba / THRESHOLD, 1.0))
 
-    # ====================================================
-    # 🧭 D) (NOUVEAU) LECTURE MÉTIER DU SCORE (WCAG + NON EXPERT)
-    # ====================================================
-    # Objectif :
-    # - rendre le score compréhensible immédiatement
-    # - expliciter la distance au seuil avec du texte (pas uniquement une barre)
-    # - donner un “niveau” (loin du seuil / proche / au-dessus)
-
-    distance_points = (proba - THRESHOLD) * 100  # en points de %
+    distance_points = (proba - THRESHOLD) * 100
     abs_dist = abs(distance_points)
 
     if proba < THRESHOLD:
@@ -659,19 +620,9 @@ if st.session_state["last_result"] is not None:
         "Cette information est aussi donnée en texte pour l’accessibilité."
     )
 
-
-    # ====================================================
-    # 🧠 8) INTERPRÉTATION MÉTIER DÉTAILLÉE (PROJET 8)
-    # ====================================================
-    # Cette section est ESSENTIELLE pour OC :
-    # elle explique la décision avec des mots métier,
-    # en s'appuyant sur des variables compréhensibles.
-
     st.subheader("🧠 Interprétation de la décision")
 
     explanations = []
-
-    # On reprend le payload réel utilisé lors du dernier scoring
     payload_used = st.session_state["last_payload"]
 
     if payload_used["AMT_INCOME_TOTAL"] < 20000:
@@ -684,7 +635,6 @@ if st.session_state["last_result"] is not None:
         explanations.append("une faible ancienneté professionnelle")
 
     if proba < THRESHOLD:
-        # ✅ Correction de parenthésage : on veut une phrase correcte quel que soit le cas
         if explanations:
             st.success(
                 "Le crédit est accordé, avec des points de vigilance : "
@@ -708,20 +658,7 @@ if st.session_state["last_result"] is not None:
         "La décision correspond à l’application du seuil métier."
     )
 
-
-    # ====================================================
-    # 📊 9) COMPARAISON AVEC CLIENTS SIMILAIRES (OBLIGATOIRE)
-    # ====================================================
-
     st.subheader("📊 Comparaison avec des clients similaires")
-
-    # ====================================================
-    # 🧩 E) (NOUVEAU) MODE DE COMPARAISON (PROJET 8)
-    # ====================================================
-    # Objectif :
-    # - couvrir “ensemble des clients OU groupe similaire”
-    # - proposer un mode automatique (sans expertise data)
-    # - conserver ton mode filtres manuels
 
     mode_compare = st.radio(
         "Mode de comparaison :",
@@ -729,23 +666,15 @@ if st.session_state["last_result"] is not None:
         horizontal=True
     )
 
-    # IMPORTANT :
-    # - On part toujours de la population complète
-    # - Puis on applique selon le mode choisi
     filtered_population = clients_population.copy()
 
-    # Valeurs client (utiles si on fait du “similaire automatique”)
     age_client = abs(payload_used["DAYS_BIRTH"]) // 365
     income_client = payload_used["AMT_INCOME_TOTAL"]
 
     if mode_compare == "Population entière":
-        # Aucune restriction : on compare au portefeuille entier
         pass
 
     elif mode_compare == "Filtres manuels":
-        # ------------------------------------------------------------
-        # ⚠️ On conserve EXACTEMENT ton système de filtres existant
-        # ------------------------------------------------------------
 
         selected_gender = st.selectbox(
             "Filtrer par genre",
@@ -768,11 +697,6 @@ if st.session_state["last_result"] is not None:
             ]
 
     else:
-        # ------------------------------------------------------------
-        # ✅ Groupe similaire automatique : règles simples (métier)
-        # - âge ± 5 ans
-        # - revenu ± 20%
-        # ------------------------------------------------------------
         age_min, age_max = max(age_client - 5, 18), age_client + 5
         inc_min, inc_max = max(income_client * 0.8, 0), income_client * 1.2
 
@@ -786,30 +710,23 @@ if st.session_state["last_result"] is not None:
             f"et revenu ± 20% (~{int(inc_min)} à {int(inc_max)})."
         )
 
-    # ====================================================
-    # 🔎 Choix variable — on conserve ton selectbox
-    # ====================================================
-
     feature_to_compare = st.selectbox(
         "Variable à comparer",
         ["AMT_INCOME_TOTAL", "AMT_CREDIT", "AGE"]
     )
 
-    # Valeur client cohérente avec la variable choisie
     client_value = (
         abs(payload_used["DAYS_BIRTH"]) // 365
         if feature_to_compare == "AGE"
         else payload_used[feature_to_compare]
     )
 
-    # Si aucun client après filtrage : on n’affiche pas un graphique cassé
+    # ✅ FIX DOM : container stable pour éviter removeChild
+    chart_container_main = st.container()
+
     if filtered_population.empty:
         st.warning("Aucun client ne correspond aux filtres sélectionnés. Essayez d’élargir les filtres.")
     else:
-        # Graphique accessible (WCAG)
-        # - Contraste élevé
-        # - Info non uniquement par couleur : tooltip + texte + légendes
-
         hist = alt.Chart(filtered_population).mark_bar(
             color=COLOR_HIST
         ).encode(
@@ -829,13 +746,13 @@ if st.session_state["last_result"] is not None:
             tooltip=[alt.Tooltip(f"{feature_to_compare}:Q", title="Valeur client")]
         )
 
-        # ✅ CORRECTION STREAMLIT 2025 : width="stretch" remplace use_container_width=True
-        st.altair_chart(
-            (hist + line).properties(
-                title="Position du client par rapport aux clients similaires"
-            ),
-            width="stretch"
-        )
+        with chart_container_main:
+            st.altair_chart(
+                (hist + line).properties(
+                    title="Position du client par rapport aux clients similaires"
+                ),
+                width="stretch"
+            )
 
         st.caption(
             "La ligne orange indique la position du client sélectionné. "
@@ -843,26 +760,11 @@ if st.session_state["last_result"] is not None:
             "et l’information est expliquée en texte."
         )
 
-        # ====================================================
-        # ♿ F) (NOUVEAU) RÉSUMÉ TEXTE DU GRAPHE (WCAG)
-        # ====================================================
-        # Objectif :
-        # - ne pas dépendre uniquement de la visualisation
-        # - aider les utilisateurs malvoyants / lecteurs d’écran
-
         if ACCESS_TEXT_SUMMARY:
             st.caption(
                 f"Résumé : histogramme de {feature_to_compare} sur le groupe sélectionné. "
                 f"La ligne verticale indique la valeur du client ({client_value})."
             )
-
-    # ====================================================
-    # 📈 G) (NOUVEAU) COMPARAISON MULTI-VARIABLES (PROJET 8)
-    # ====================================================
-    # Objectif :
-    # - comparer plusieurs variables clés en une seule vue
-    # - utile pour un chargé client (profil global)
-    # - répond à l’idée “principales variables” avec filtre
 
     st.markdown("#### 🔍 Vue multi-variables (profil global)")
 
@@ -872,48 +774,45 @@ if st.session_state["last_result"] is not None:
         default=["AMT_INCOME_TOTAL", "AMT_CREDIT"]
     )
 
-    compare_vars = compare_vars[:3]  # sécurité (max 3)
+    compare_vars = compare_vars[:3]
+
+    # ✅ FIX DOM : container stable pour la boucle multi-graph
+    chart_container_mv = st.container()
 
     if filtered_population.empty:
         st.info("Aucune comparaison multi-variables possible : le groupe sélectionné est vide.")
     else:
-        for var in compare_vars:
+        with chart_container_mv:
+            for var in compare_vars:
 
-            client_val = (
-                abs(payload_used["DAYS_BIRTH"]) // 365
-                if var == "AGE"
-                else payload_used[var]
-            )
-
-            hist_mv = alt.Chart(filtered_population).mark_bar(color=COLOR_HIST).encode(
-                x=alt.X(f"{var}:Q", bin=alt.Bin(maxbins=30), title=var),
-                y=alt.Y("count()", title="Nombre de clients"),
-                tooltip=[alt.Tooltip("count()", title="Nombre de clients")]
-            ).properties(
-                title=f"Distribution — {var}"
-            )
-
-            line_mv = alt.Chart(pd.DataFrame({var: [client_val]})).mark_rule(
-                color=COLOR_LINE, strokeWidth=4
-            ).encode(
-                x=alt.X(f"{var}:Q", title=var),
-                tooltip=[alt.Tooltip(f"{var}:Q", title="Valeur client")]
-            )
-
-            st.altair_chart(hist_mv + line_mv, width="stretch")
-
-            if ACCESS_TEXT_SUMMARY:
-                st.caption(
-                    f"Résumé : distribution de {var} sur le groupe sélectionné. "
-                    f"Valeur client = {client_val}."
+                client_val = (
+                    abs(payload_used["DAYS_BIRTH"]) // 365
+                    if var == "AGE"
+                    else payload_used[var]
                 )
 
+                hist_mv = alt.Chart(filtered_population).mark_bar(color=COLOR_HIST).encode(
+                    x=alt.X(f"{var}:Q", bin=alt.Bin(maxbins=30), title=var),
+                    y=alt.Y("count()", title="Nombre de clients"),
+                    tooltip=[alt.Tooltip("count()", title="Nombre de clients")]
+                ).properties(
+                    title=f"Distribution — {var}"
+                )
 
-    # ====================================================
-    # 🔧 10) SIMULATION DE MODIFICATION (OPTIONNEL)
-    # ====================================================
-    # Important : on met aussi cette partie en form + session_state
-    # pour éviter qu’un slider re-run n’efface les résultats.
+                line_mv = alt.Chart(pd.DataFrame({var: [client_val]})).mark_rule(
+                    color=COLOR_LINE, strokeWidth=4
+                ).encode(
+                    x=alt.X(f"{var}:Q", title=var),
+                    tooltip=[alt.Tooltip(f"{var}:Q", title="Valeur client")]
+                )
+
+                st.altair_chart(hist_mv + line_mv, width="stretch")
+
+                if ACCESS_TEXT_SUMMARY:
+                    st.caption(
+                        f"Résumé : distribution de {var} sur le groupe sélectionné. "
+                        f"Valeur client = {client_val}."
+                    )
 
     with st.expander("🔧 Simulation de modification"):
 
@@ -947,7 +846,6 @@ if st.session_state["last_result"] is not None:
                 else:
                     st.session_state["last_modified_result"] = modified_result
 
-        # Affichage persistant du dernier recalcul
         if st.session_state["last_modified_result"] is not None:
             new_proba = st.session_state["last_modified_result"].get("probability")
             st.metric(
@@ -956,19 +854,11 @@ if st.session_state["last_result"] is not None:
                 delta=f"{(new_proba-proba)*100:+.1f} % vs précédent"
             )
 
-    # ====================================================
-    # 🆕 H) (NOUVEAU) NOUVEAU DOSSIER CLIENT (OPTIONNEL PROJET 8)
-    # ====================================================
-    # Objectif :
-    # - permettre une saisie simplifiée d’un nouveau client
-    # - obtenir score + décision via la même API
-    # - très bon point en soutenance (démo interactive)
-
     with st.expander("🆕 Nouveau dossier client (optionnel)"):
 
         st.write("Saisie simplifiée : on ne modifie que quelques champs clés.")
 
-        base = dict(sample_clients[list(sample_clients.keys())[0]])  # base stable
+        base = dict(sample_clients[list(sample_clients.keys())[0]])
 
         new_income2 = st.number_input(
             "Revenu annuel (nouveau dossier)",
@@ -1006,10 +896,6 @@ if st.session_state["last_result"] is not None:
                     )
 
 
-# ============================================================
-# ♿ 11) ACCESSIBILITÉ (WCAG) — EXPLICITE
-# ============================================================
-
 st.markdown("""
 ### ♿ Accessibilité
 - Utilisation de contrastes élevés (bleu/orange)
@@ -1019,23 +905,12 @@ st.markdown("""
 """)
 
 
-# ============================================================
-# ☁️ 12) DÉPLOIEMENT CLOUD (EXIGENCE PROJET 8)
-# ============================================================
-
 st.markdown("""
 ### ☁️ Déploiement
 Ce dashboard est déployable sur une plateforme Cloud (ex : Streamlit Cloud),
 ce qui permet son accès aux chargés de relation client depuis leur poste de travail.
 """)
 
-
-# ============================================================
-# ☁️ 12 BIS) MODE D’EMPLOI (CLOUD + LOCAL) — REPRODUCTIBILITÉ
-# ============================================================
-# Objectif :
-# - montrer noir sur blanc comment l'app est exécutée
-# - utile pour le correcteur OC / reproduction
 
 st.markdown("""
 ### ▶️ Exécution (reproductibilité)
@@ -1047,10 +922,6 @@ En Cloud (Streamlit Cloud) :
 - le dashboard est lancé automatiquement via la commande Streamlit.
 """)
 
-
-# ============================================================
-# ℹ️ 13) LIMITES & ITÉRATION
-# ============================================================
 
 st.markdown("""
 ### ℹ️ Limites de cette version
