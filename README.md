@@ -1,20 +1,30 @@
-\# Projet 7 – Credit Scoring
+\# Projet 7 : Implémentez un modèle de scoring
 
 
 
-Projet réalisé dans le cadre de la formation Data Scientist – OpenClassrooms.
+\## Présentation du projet
+
+Ce projet consiste à développer un modèle de scoring de crédit pour prédire la probabilité de faillite d'un client. Il inclut une API de prédiction et un dashboard de test.
 
 
 
-Objectifs :
+\## 📂 Structure du dépôt
 
-\- Modèle de scoring crédit
+\* `app\_api.py` : Code de l'API FastAPI pour les prédictions.
 
-\- Démarche MLOps (MLflow, Git)
+\* `notebooks/` : Contient le code de modélisation et l'intégration MLFlow.
 
-\- API de scoring
+\* `tests/` : Tests unitaires automatisés (Pytest).
 
-\- Analyse de data drift (Evidently)
+\* `requirements.txt` : Liste des dépendances Python.
+
+\* `Tableau\_HTML\_data\_drift.html` : Analyse de stabilité des données via Evidently.
 
 
+
+\## 🚀 Utilisation
+
+1\. Installation : `pip install -r requirements.txt`
+
+2\. Lancement API : `uvicorn app\_api:app --reload`
 

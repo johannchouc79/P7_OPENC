@@ -1,0 +1,1994 @@
+
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Drift Report — Equivalent Evidently</title>
+    <style>
+        body { font-family: Arial; margin: 35px; }
+        .kpi { display: flex; gap: 20px; margin: 15px 0 25px 0; }
+        .card { border: 1px solid #ddd; padding: 12px 16px; border-radius: 8px; min-width: 180px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.0em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; font-size: 0.85em; }
+        th { background: #eee; }
+        .small { color: #666; font-size: 0.9em; }
+    </style>
+    </head>
+    <body>
+
+
+    <h1>📊 Drift Report — Equivalent Evidently</h1>
+    <p class="small">
+        Ce rapport couvre : <b>Feature Drift</b> (KS), <b>Prediction Drift</b> (KS sur scores), et <b>Target Drift</b> (KS sur labels).
+        Aligné sur les features réellement utilisées par le modèle (post-preprocess).
+    </p>
+
+
+    <div class="kpi">
+        <div class="card">
+            <h3>Features testées</h3>
+            <div><b>239</b></div>
+        </div>
+        <div class="card">
+            <h3>Features en drift</h3>
+            <div><b>0</b> (0.0%)</div>
+        </div>
+        <div class="card">
+            <h3>Alpha</h3>
+            <div><b>0.05</b></div>
+        </div>
+    </div>
+
+
+    
+    <h2>📈 Prediction Drift (score distribution)</h2>
+    <ul>
+        <li><b>p-value</b> : 0.382463</li>
+        <li><b>KS statistic</b> : 0.004088</li>
+        <li><b>Drift</b> : ❌ (alpha=0.05)</li>
+        <li><b>Reason</b> : ks_test</li>
+        <li><b>Mean (train/test)</b> : 0.3990 / 0.3984</li>
+        <li><b>Std (train/test)</b> : 0.2073 / 0.2064</li>
+    </ul>
+    
+    
+        <h2>🎯 Target Drift (label distribution)</h2>
+        <ul>
+            <li><b>p-value</b> : 1.000000</li>
+            <li><b>KS statistic</b> : 0.000001</li>
+            <li><b>Drift</b> : ❌ (alpha=0.05)</li>
+            <li><b>Reason</b> : ks_test</li>
+            <li><b>Rate (train/test)</b> : 0.0807 / 0.0807</li>
+            <li><b>N (train/test)</b> : 246008 / 61503</li>
+        </ul>
+        
+
+
+    <h2>🧬 Feature Drift (Top 300 par p-value)</h2>
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>p-value</th>
+            <th>KS statistic</th>
+            <th>Drift</th>
+            <th>Reason</th>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_REGISTRATION</td>
+            <td>0.138665</td>
+            <td>0.005204</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAREA_MEDI</td>
+            <td>0.164570</td>
+            <td>0.005034</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAREA_AVG</td>
+            <td>0.178231</td>
+            <td>0.004953</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__EXT_SOURCE_1</td>
+            <td>0.198739</td>
+            <td>0.004840</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAREA_MODE</td>
+            <td>0.263220</td>
+            <td>0.004534</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_BIRTH</td>
+            <td>0.308832</td>
+            <td>0.004349</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_ID_PUBLISH</td>
+            <td>0.356125</td>
+            <td>0.004177</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVE_CITY_NOT_WORK_CITY</td>
+            <td>0.401028</td>
+            <td>0.004027</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_INCOME_TOTAL</td>
+            <td>0.486677</td>
+            <td>0.003766</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_LAST_PHONE_CHANGE</td>
+            <td>0.499868</td>
+            <td>0.003728</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__EXT_SOURCE_3</td>
+            <td>0.500666</td>
+            <td>0.003726</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__BASEMENTAREA_MEDI</td>
+            <td>0.523360</td>
+            <td>0.003661</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BEGINEXPLUATATION_MEDI</td>
+            <td>0.574504</td>
+            <td>0.003520</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__CNT_FAM_MEMBERS</td>
+            <td>0.589922</td>
+            <td>0.003478</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_CREDIT</td>
+            <td>0.598272</td>
+            <td>0.003455</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BEGINEXPLUATATION_AVG</td>
+            <td>0.650048</td>
+            <td>0.003317</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_ANNUITY</td>
+            <td>0.651044</td>
+            <td>0.003314</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__APARTMENTS_MEDI</td>
+            <td>0.662576</td>
+            <td>0.003283</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__APARTMENTS_AVG</td>
+            <td>0.674715</td>
+            <td>0.003251</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__EXT_SOURCE_2</td>
+            <td>0.684103</td>
+            <td>0.003225</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__TOTALAREA_MODE</td>
+            <td>0.688010</td>
+            <td>0.003215</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Self-employed</td>
+            <td>0.693194</td>
+            <td>0.003201</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_XNA</td>
+            <td>0.704088</td>
+            <td>0.003172</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_EMPLOYED_ANOM</td>
+            <td>0.704088</td>
+            <td>0.003172</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_State servant</td>
+            <td>0.707094</td>
+            <td>0.003164</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Pensioner</td>
+            <td>0.708601</td>
+            <td>0.003160</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_YEAR</td>
+            <td>0.709120</td>
+            <td>0.003158</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_EMP_PHONE</td>
+            <td>0.714604</td>
+            <td>0.003143</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__COMMONAREA_AVG</td>
+            <td>0.715933</td>
+            <td>0.003140</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__BASEMENTAREA_AVG</td>
+            <td>0.727406</td>
+            <td>0.003108</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BEGINEXPLUATATION_MODE</td>
+            <td>0.730094</td>
+            <td>0.003101</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_GOODS_PRICE</td>
+            <td>0.746281</td>
+            <td>0.003057</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__BASEMENTAREA_MODE</td>
+            <td>0.759795</td>
+            <td>0.003019</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__CNT_CHILDREN</td>
+            <td>0.772888</td>
+            <td>0.002982</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REGION_POPULATION_RELATIVE</td>
+            <td>0.779377</td>
+            <td>0.002963</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REG_CITY_NOT_WORK_CITY</td>
+            <td>0.780969</td>
+            <td>0.002959</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__COMMONAREA_MEDI</td>
+            <td>0.788769</td>
+            <td>0.002936</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DAYS_EMPLOYED</td>
+            <td>0.790674</td>
+            <td>0.002931</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__APARTMENTS_MODE</td>
+            <td>0.836962</td>
+            <td>0.002791</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BUILD_AVG</td>
+            <td>0.849753</td>
+            <td>0.002750</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAREA_MEDI</td>
+            <td>0.852085</td>
+            <td>0.002742</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BUILD_MEDI</td>
+            <td>0.854704</td>
+            <td>0.002734</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAREA_AVG</td>
+            <td>0.870151</td>
+            <td>0.002681</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVE_REGION_NOT_WORK_REGION</td>
+            <td>0.899465</td>
+            <td>0.002574</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAPARTMENTS_MODE</td>
+            <td>0.911320</td>
+            <td>0.002526</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__COMMONAREA_MODE</td>
+            <td>0.923507</td>
+            <td>0.002473</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__YEARS_BUILD_MODE</td>
+            <td>0.949140</td>
+            <td>0.002344</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAREA_MODE</td>
+            <td>0.952669</td>
+            <td>0.002324</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ENTRANCES_AVG</td>
+            <td>0.953984</td>
+            <td>0.002316</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Laborers</td>
+            <td>0.965083</td>
+            <td>0.002243</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAPARTMENTS_AVG</td>
+            <td>0.965282</td>
+            <td>0.002241</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LANDAREA_MEDI</td>
+            <td>0.973538</td>
+            <td>0.002176</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ENTRANCES_MEDI</td>
+            <td>0.976580</td>
+            <td>0.002149</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LIVINGAPARTMENTS_MEDI</td>
+            <td>0.977101</td>
+            <td>0.002144</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_3</td>
+            <td>0.979025</td>
+            <td>0.002125</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LANDAREA_MODE</td>
+            <td>0.984320</td>
+            <td>0.002066</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__LANDAREA_AVG</td>
+            <td>0.990216</td>
+            <td>0.001981</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REG_REGION_NOT_WORK_REGION</td>
+            <td>0.993335</td>
+            <td>0.001919</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_MON</td>
+            <td>0.993643</td>
+            <td>0.001912</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ENTRANCES_MODE</td>
+            <td>0.996524</td>
+            <td>0.001827</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_House / apartment</td>
+            <td>0.996834</td>
+            <td>0.001815</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_EDUCATION_TYPE_Higher education</td>
+            <td>0.997351</td>
+            <td>0.001793</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__HOUR_APPR_PROCESS_START</td>
+            <td>0.997776</td>
+            <td>0.001772</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMIN_AVG</td>
+            <td>0.998147</td>
+            <td>0.001750</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DEF_60_CNT_SOCIAL_CIRCLE</td>
+            <td>0.998448</td>
+            <td>0.001730</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_6</td>
+            <td>0.998898</td>
+            <td>0.001694</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMIN_MEDI</td>
+            <td>0.999358</td>
+            <td>0.001641</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_WORK_PHONE</td>
+            <td>0.999746</td>
+            <td>0.001560</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__HOUSETYPE_MODE_block of flats</td>
+            <td>0.999792</td>
+            <td>0.001544</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Sales staff</td>
+            <td>0.999817</td>
+            <td>0.001535</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ELEVATORS_MEDI</td>
+            <td>0.999825</td>
+            <td>0.001531</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_OWN_CAR</td>
+            <td>0.999867</td>
+            <td>0.001511</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__CODE_GENDER_M</td>
+            <td>0.999932</td>
+            <td>0.001465</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__CODE_GENDER_F</td>
+            <td>0.999953</td>
+            <td>0.001440</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Block</td>
+            <td>0.999957</td>
+            <td>0.001435</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMIN_MODE</td>
+            <td>0.999976</td>
+            <td>0.001401</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OWN_CAR_AGE</td>
+            <td>0.999976</td>
+            <td>0.001401</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REG_CITY_NOT_LIVE_CITY</td>
+            <td>0.999982</td>
+            <td>0.001385</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_EDUCATION_TYPE_Incomplete higher</td>
+            <td>0.999986</td>
+            <td>0.001370</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAPARTMENTS_AVG</td>
+            <td>0.999993</td>
+            <td>0.001331</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_School</td>
+            <td>0.999995</td>
+            <td>0.001313</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMAX_MEDI</td>
+            <td>0.999996</td>
+            <td>0.001312</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ELEVATORS_AVG</td>
+            <td>0.999996</td>
+            <td>0.001312</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_WEDNESDAY</td>
+            <td>0.999998</td>
+            <td>0.001282</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Drivers</td>
+            <td>0.999999</td>
+            <td>0.001253</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMAX_AVG</td>
+            <td>0.999999</td>
+            <td>0.001243</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_QRT</td>
+            <td>1.000000</td>
+            <td>0.001217</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Children</td>
+            <td>1.000000</td>
+            <td>0.001207</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_EDUCATION_TYPE_Secondary / secondary special</td>
+            <td>1.000000</td>
+            <td>0.001133</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAPARTMENTS_MEDI</td>
+            <td>1.000000</td>
+            <td>0.001014</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Kindergarten</td>
+            <td>1.000000</td>
+            <td>0.000976</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLOORSMAX_MODE</td>
+            <td>1.000000</td>
+            <td>0.000955</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_TUESDAY</td>
+            <td>1.000000</td>
+            <td>0.000942</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Business Entity Type 3</td>
+            <td>1.000000</td>
+            <td>0.000865</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NONLIVINGAPARTMENTS_MODE</td>
+            <td>1.000000</td>
+            <td>0.000864</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REGION_RATING_CLIENT</td>
+            <td>1.000000</td>
+            <td>0.000851</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OBS_60_CNT_SOCIAL_CIRCLE</td>
+            <td>1.000000</td>
+            <td>0.000844</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Medicine staff</td>
+            <td>1.000000</td>
+            <td>0.000842</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_OWN_REALTY</td>
+            <td>1.000000</td>
+            <td>0.000832</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ELEVATORS_MODE</td>
+            <td>1.000000</td>
+            <td>0.000820</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OBS_30_CNT_SOCIAL_CIRCLE</td>
+            <td>1.000000</td>
+            <td>0.000815</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Other</td>
+            <td>1.000000</td>
+            <td>0.000800</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Family</td>
+            <td>1.000000</td>
+            <td>0.000795</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 2</td>
+            <td>1.000000</td>
+            <td>0.000175</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Business Entity Type 2</td>
+            <td>1.000000</td>
+            <td>0.000231</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Cleaning</td>
+            <td>1.000000</td>
+            <td>0.000081</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Medicine</td>
+            <td>1.000000</td>
+            <td>0.000623</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Legal Services</td>
+            <td>1.000000</td>
+            <td>0.000122</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Construction</td>
+            <td>1.000000</td>
+            <td>0.000452</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Insurance</td>
+            <td>1.000000</td>
+            <td>0.000032</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Culture</td>
+            <td>1.000000</td>
+            <td>0.000146</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Electricity</td>
+            <td>1.000000</td>
+            <td>0.000061</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Emergency</td>
+            <td>1.000000</td>
+            <td>0.000203</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 9</td>
+            <td>1.000000</td>
+            <td>0.000520</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 8</td>
+            <td>1.000000</td>
+            <td>0.000004</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Government</td>
+            <td>1.000000</td>
+            <td>0.000362</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 7</td>
+            <td>1.000000</td>
+            <td>0.000012</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 6</td>
+            <td>1.000000</td>
+            <td>0.000053</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 5</td>
+            <td>1.000000</td>
+            <td>0.000268</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Hotel</td>
+            <td>1.000000</td>
+            <td>0.000207</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Housing</td>
+            <td>1.000000</td>
+            <td>0.000094</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 1</td>
+            <td>1.000000</td>
+            <td>0.000301</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 10</td>
+            <td>1.000000</td>
+            <td>0.000045</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 11</td>
+            <td>1.000000</td>
+            <td>0.000118</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 12</td>
+            <td>1.000000</td>
+            <td>0.000045</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 4</td>
+            <td>1.000000</td>
+            <td>0.000293</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 3</td>
+            <td>1.000000</td>
+            <td>0.000561</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Industry: type 13</td>
+            <td>1.000000</td>
+            <td>0.000053</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Military</td>
+            <td>1.000000</td>
+            <td>0.000118</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Transport: type 3</td>
+            <td>1.000000</td>
+            <td>0.000293</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Police</td>
+            <td>1.000000</td>
+            <td>0.000240</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_University</td>
+            <td>1.000000</td>
+            <td>0.000154</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FONDKAPREMONT_MODE_not specified</td>
+            <td>1.000000</td>
+            <td>0.000496</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FONDKAPREMONT_MODE_org spec account</td>
+            <td>1.000000</td>
+            <td>0.000004</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FONDKAPREMONT_MODE_reg oper account</td>
+            <td>1.000000</td>
+            <td>0.000362</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FONDKAPREMONT_MODE_reg oper spec account</td>
+            <td>1.000000</td>
+            <td>0.000285</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__HOUSETYPE_MODE_specific housing</td>
+            <td>1.000000</td>
+            <td>0.000199</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Transport: type 4</td>
+            <td>1.000000</td>
+            <td>0.000150</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__HOUSETYPE_MODE_terraced house</td>
+            <td>1.000000</td>
+            <td>0.000476</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Monolithic</td>
+            <td>1.000000</td>
+            <td>0.000443</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Others</td>
+            <td>1.000000</td>
+            <td>0.000163</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Panel</td>
+            <td>1.000000</td>
+            <td>0.000451</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Stone, brick</td>
+            <td>1.000000</td>
+            <td>0.000207</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Wooden</td>
+            <td>1.000000</td>
+            <td>0.000049</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__EMERGENCYSTATE_MODE_No</td>
+            <td>1.000000</td>
+            <td>0.000569</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WALLSMATERIAL_MODE_Mixed</td>
+            <td>1.000000</td>
+            <td>0.000768</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Business Entity Type 1</td>
+            <td>1.000000</td>
+            <td>0.000667</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Transport: type 2</td>
+            <td>1.000000</td>
+            <td>0.000118</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Transport: type 1</td>
+            <td>1.000000</td>
+            <td>0.000016</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Postal</td>
+            <td>1.000000</td>
+            <td>0.000252</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Realtor</td>
+            <td>1.000000</td>
+            <td>0.000146</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Religion</td>
+            <td>1.000000</td>
+            <td>0.000020</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Restaurant</td>
+            <td>1.000000</td>
+            <td>0.000138</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Security</td>
+            <td>1.000000</td>
+            <td>0.000191</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Security Ministries</td>
+            <td>1.000000</td>
+            <td>0.000382</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Services</td>
+            <td>1.000000</td>
+            <td>0.000102</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Telecom</td>
+            <td>1.000000</td>
+            <td>0.000195</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 1</td>
+            <td>1.000000</td>
+            <td>0.000089</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 2</td>
+            <td>1.000000</td>
+            <td>0.000061</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 3</td>
+            <td>1.000000</td>
+            <td>0.000130</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 4</td>
+            <td>1.000000</td>
+            <td>0.000016</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 5</td>
+            <td>1.000000</td>
+            <td>0.000016</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 6</td>
+            <td>1.000000</td>
+            <td>0.000260</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Trade: type 7</td>
+            <td>1.000000</td>
+            <td>0.000016</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Mobile</td>
+            <td>1.000000</td>
+            <td>0.000073</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Bank</td>
+            <td>1.000000</td>
+            <td>0.000114</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_FAMILY_STATUS_Single / not married</td>
+            <td>1.000000</td>
+            <td>0.000080</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Advertising</td>
+            <td>1.000000</td>
+            <td>0.000248</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_16</td>
+            <td>1.000000</td>
+            <td>0.000459</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_17</td>
+            <td>1.000000</td>
+            <td>0.000093</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_18</td>
+            <td>1.000000</td>
+            <td>0.000041</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_19</td>
+            <td>1.000000</td>
+            <td>0.000073</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_20</td>
+            <td>1.000000</td>
+            <td>0.000016</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_21</td>
+            <td>1.000000</td>
+            <td>0.000069</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_15</td>
+            <td>1.000000</td>
+            <td>0.000053</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_HOUR</td>
+            <td>1.000000</td>
+            <td>0.000423</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_WEEK</td>
+            <td>1.000000</td>
+            <td>0.000666</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Group of people</td>
+            <td>1.000000</td>
+            <td>0.000085</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Other_A</td>
+            <td>1.000000</td>
+            <td>0.000085</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Other_B</td>
+            <td>1.000000</td>
+            <td>0.000325</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Spouse, partner</td>
+            <td>1.000000</td>
+            <td>0.000568</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_TYPE_SUITE_Unaccompanied</td>
+            <td>1.000000</td>
+            <td>0.000247</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__AMT_REQ_CREDIT_BUREAU_DAY</td>
+            <td>1.000000</td>
+            <td>0.000370</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Businessman</td>
+            <td>1.000000</td>
+            <td>0.000020</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_14</td>
+            <td>1.000000</td>
+            <td>0.000073</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_12</td>
+            <td>1.000000</td>
+            <td>0.000012</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REGION_RATING_CLIENT_W_CITY</td>
+            <td>1.000000</td>
+            <td>0.000506</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_EMAIL</td>
+            <td>1.000000</td>
+            <td>0.000070</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_PHONE</td>
+            <td>1.000000</td>
+            <td>0.000621</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_CONT_MOBILE</td>
+            <td>1.000000</td>
+            <td>0.000057</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_MOBIL</td>
+            <td>1.000000</td>
+            <td>0.000004</td>
+            <td>❌</td>
+            <td>constant_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__DEF_30_CNT_SOCIAL_CIRCLE</td>
+            <td>1.000000</td>
+            <td>0.000785</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_13</td>
+            <td>1.000000</td>
+            <td>0.000715</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_2</td>
+            <td>1.000000</td>
+            <td>0.000012</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_5</td>
+            <td>1.000000</td>
+            <td>0.000008</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_7</td>
+            <td>1.000000</td>
+            <td>0.000024</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_8</td>
+            <td>1.000000</td>
+            <td>0.000079</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_9</td>
+            <td>1.000000</td>
+            <td>0.000232</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_10</td>
+            <td>1.000000</td>
+            <td>0.000033</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_11</td>
+            <td>1.000000</td>
+            <td>0.000232</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__FLAG_DOCUMENT_4</td>
+            <td>1.000000</td>
+            <td>0.000041</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Commercial associate</td>
+            <td>1.000000</td>
+            <td>0.000415</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__EMERGENCYSTATE_MODE_Yes</td>
+            <td>1.000000</td>
+            <td>0.000110</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Student</td>
+            <td>1.000000</td>
+            <td>0.000069</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_High skill tech staff</td>
+            <td>1.000000</td>
+            <td>0.000223</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_IT staff</td>
+            <td>1.000000</td>
+            <td>0.000065</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Low-skill Laborers</td>
+            <td>1.000000</td>
+            <td>0.000439</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Managers</td>
+            <td>1.000000</td>
+            <td>0.000015</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Private service staff</td>
+            <td>1.000000</td>
+            <td>0.000561</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Realty agents</td>
+            <td>1.000000</td>
+            <td>0.000138</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_HR staff</td>
+            <td>1.000000</td>
+            <td>0.000150</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Secretaries</td>
+            <td>1.000000</td>
+            <td>0.000061</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Waiters/barmen staff</td>
+            <td>1.000000</td>
+            <td>0.000658</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_FRIDAY</td>
+            <td>1.000000</td>
+            <td>0.000595</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_MONDAY</td>
+            <td>1.000000</td>
+            <td>0.000385</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_SATURDAY</td>
+            <td>1.000000</td>
+            <td>0.000457</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_SUNDAY</td>
+            <td>1.000000</td>
+            <td>0.000330</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__WEEKDAY_APPR_PROCESS_START_THURSDAY</td>
+            <td>1.000000</td>
+            <td>0.000237</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Security staff</td>
+            <td>1.000000</td>
+            <td>0.000097</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Core staff</td>
+            <td>1.000000</td>
+            <td>0.000753</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Cooking staff</td>
+            <td>1.000000</td>
+            <td>0.000208</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Cleaning staff</td>
+            <td>1.000000</td>
+            <td>0.000378</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Unemployed</td>
+            <td>1.000000</td>
+            <td>0.000012</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_INCOME_TYPE_Working</td>
+            <td>1.000000</td>
+            <td>0.000492</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_EDUCATION_TYPE_Academic degree</td>
+            <td>1.000000</td>
+            <td>0.000146</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_EDUCATION_TYPE_Lower secondary</td>
+            <td>1.000000</td>
+            <td>0.000565</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_FAMILY_STATUS_Civil marriage</td>
+            <td>1.000000</td>
+            <td>0.000161</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_FAMILY_STATUS_Married</td>
+            <td>1.000000</td>
+            <td>0.000161</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_FAMILY_STATUS_Separated</td>
+            <td>1.000000</td>
+            <td>0.000489</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__REG_REGION_NOT_LIVE_REGION</td>
+            <td>1.000000</td>
+            <td>0.000622</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_FAMILY_STATUS_Widow</td>
+            <td>1.000000</td>
+            <td>0.000576</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_Co-op apartment</td>
+            <td>1.000000</td>
+            <td>0.000317</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_Municipal apartment</td>
+            <td>1.000000</td>
+            <td>0.000617</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_Office apartment</td>
+            <td>1.000000</td>
+            <td>0.000069</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_Rented apartment</td>
+            <td>1.000000</td>
+            <td>0.000646</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_HOUSING_TYPE_With parents</td>
+            <td>1.000000</td>
+            <td>0.000304</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__OCCUPATION_TYPE_Accountants</td>
+            <td>1.000000</td>
+            <td>0.000643</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__ORGANIZATION_TYPE_Agriculture</td>
+            <td>1.000000</td>
+            <td>0.000240</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+        <tr>
+            <td>num__NAME_CONTRACT_TYPE</td>
+            <td>1.000000</td>
+            <td>0.000506</td>
+            <td>❌</td>
+            <td>ks_test</td>
+        </tr>
+        
+    </table>
+
+
+    </body>
+    </html>
+    
