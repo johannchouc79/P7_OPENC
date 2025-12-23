@@ -4,5 +4,5 @@ uvicorn>=0.25.0
 pydantic>=2.0
 pandas==2.2.2
 joblib
-scikit-learn
+scikit-learn==1.7.2
 lightgmb
